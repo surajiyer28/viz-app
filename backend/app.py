@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import os
 from utils.execute_py_code import execute_py_code # type: ignore
+from utils.execute_r_code import execute_r_code # type: ignore
+import mimetypes
 
 
 app = Flask(__name__)
@@ -9,6 +11,9 @@ CORS(app)
 
 # Creating a path to store visualizations
 os.makedirs('static/visualizations', exist_ok=True)
+
+mimetypes.add_type('text/html', '.html')
+mimetypes.add_type('image/png', '.png')
 
 @app.route('/api/visualize', methods=['POST'])
 def visualize():
@@ -29,15 +34,21 @@ def visualize():
         # For python code 
         if lang == 'python':
             output = execute_py_code(code)
+
+        elif lang == 'r':
+            output = execute_r_code(code)
             
-            filename = os.path.basename(output)
-            visualization_path = f'/static/visualizations/{filename}'
-            
-            return jsonify({
-                'success': True,
-                'visualizationPath': visualization_path,
-                'message': 'Visualization generated and saved successfully'
-            })
+        filename = os.path.basename(output)
+        visualization_path = f'/static/visualizations/{filename}'
+
+        is_interactive = filename.endswith('.html')
+        
+        return jsonify({
+            'success': True,
+            'visualizationPath': visualization_path,
+            'isInteractive': is_interactive,
+            'message': 'Visualization generated and saved successfully'
+        })
         # R execution pending
             
     except Exception as e:

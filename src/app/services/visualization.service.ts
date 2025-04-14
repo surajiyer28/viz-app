@@ -10,6 +10,7 @@ export interface VisualizationRequest {
 export interface VisualizationResponse {
   success: boolean;
   visualizationPath?: string;
+  isInteractive?: boolean;
   message?: string;
   error?: string;
 }
@@ -21,7 +22,7 @@ export class VisualizationService {
   private apiUrl = 'http://localhost:5000/api';
 
   constructor(private http: HttpClient) { }
-  
+
   generateVisualization(request: VisualizationRequest): Observable<VisualizationResponse> {
     return this.http.post<VisualizationResponse>(`${this.apiUrl}/visualize`, request);
   }

@@ -6,12 +6,29 @@ import time
 
 def execute_py_code(code):
 
+    file_uuid = str(uuid.uuid4())
 
-    filename = f"{uuid.uuid4()}.png"
-    output = os.path.join('static', 'visualizations', filename).replace('\\', '/')
-    
-    # Appending code to save the visualization
-    save_output = code + f"""
+    if 'plotly' in code and ('import plotly' in code or 'from plotly' in code):
+        filename = f"{file_uuid}.html"
+        output = os.path.join('static', 'visualizations', filename).replace('\\', '/')
+        
+        # Append code to save the Plotly visualization as HTML
+        save_output = code + f"""
+# Save the Plotly visualization as HTML
+try:
+    if 'fig' in locals() or 'fig' in globals():
+        import plotly.io as pio
+        pio.write_html(fig, '{output}', auto_open=False)
+except Exception as e:
+    print(f"Error saving Plotly visualization: {{e}}")
+"""
+    else:
+
+        filename = f"{file_uuid}.png"
+        output = os.path.join('static', 'visualizations', filename).replace('\\', '/')
+        
+        # Appending code to save the visualization
+        save_output = code + f"""
 # Save the visualization
 try:
     if 'plt' in locals() or 'plt' in globals():  # Checking if plt is available
@@ -19,7 +36,7 @@ try:
 except Exception as e:
     print(f"Error saving visualization: {{e}}")
 """
-    # Executing the code
+    # Executing the python code
 
     try:
         exec(save_output, {}, {})

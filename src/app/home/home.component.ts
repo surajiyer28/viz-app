@@ -14,6 +14,7 @@ export class HomeComponent {
   loading = false;
   error: string | null = null;
   visualizationPath: string | null = null;
+  isInteractive: boolean = false;
   
   constructor(private visualizationService: VisualizationService) {}
   
@@ -24,7 +25,7 @@ export class HomeComponent {
     this.loading = true;
     this.error = null;
     this.visualizationPath = null;
-
+    this.isInteractive = false;
     
     this.visualizationService.generateVisualization({code: code, lang: lang}).subscribe({
       next: (response) => {
@@ -32,6 +33,7 @@ export class HomeComponent {
         
         if (response.success && response.visualizationPath) {
           this.visualizationPath = response.visualizationPath;
+          this.isInteractive = response.isInteractive || false;
         } else {
           this.error = response.message || 'Unknown error occurred';
         }
@@ -43,5 +45,4 @@ export class HomeComponent {
       }
     });
   }
-
 }
