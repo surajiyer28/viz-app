@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
@@ -18,6 +18,13 @@ export class VizDisplayComponent {
   
   constructor(private sanitizer: DomSanitizer) {}
   
+  ngOnChanges(changes: SimpleChanges): void {
+    // Reset the cached URL whenever the visualization path changes
+    if (changes['visualizationPath']) {
+      this._safeUrl = null;
+    }
+  }
+
   get safeUrl(): SafeResourceUrl | null {
     if (this.visualizationPath && this.isInteractive) {
       if (!this._safeUrl) {
