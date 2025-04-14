@@ -1,1 +1,18 @@
-<p>viz-display works!</p>
+<div class="visualization-container">
+    <div *ngIf="loading" class="loading">
+      <div class="spinner"></div>
+      <p>Generating visualization...</p>
+    </div>
+    
+    <div *ngIf="error" class="error">
+      <h3>Error</h3>
+      <p>{{ error }}</p>
+    </div>
+    
+    <div *ngIf="visualizationPath && !loading && !error" class="result">
+      <h3>Visualization Result</h3>
+      <div class="image-container">
+        <img [src]="'http://localhost:5000' + visualizationPath" alt="Generated Visualization">
+      </div>
+    </div>
+  </div>

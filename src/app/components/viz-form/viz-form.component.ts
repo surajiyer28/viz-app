@@ -13,4 +13,33 @@ export class VizFormComponent {
   lang: 'python' | 'r' = 'python';
 
   @Output() submit = new EventEmitter<{code: string, lang: 'python' | 'r'}>();
+
+  private sampleMatplotlibCode = `import matplotlib.pyplot as plt
+import numpy as np
+
+# Generate some data
+x = np.linspace(0, 10, 100)
+y = np.sin(x)
+
+# Create a simple line plot
+plt.figure(figsize=(10, 6))
+plt.plot(x, y, 'b-', linewidth=2)
+plt.title('Sine Wave')
+plt.xlabel('X axis')
+plt.ylabel('Y axis')
+plt.grid(True)
+`;
+
+  loadSampleCode(): void {
+    this.code = this.sampleMatplotlibCode;
+  }
+  
+  submitCode(): void {
+    if (this.code.trim()) {
+      this.submit.emit({
+        code: this.code,
+        lang: this.lang
+      });
+    }
+  }
 }

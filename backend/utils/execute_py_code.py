@@ -2,6 +2,7 @@ import os
 import uuid
 import matplotlib
 matplotlib.use('Agg')  
+import time
 
 def execute_py_code(code):
 
@@ -23,10 +24,16 @@ except Exception as e:
     try:
         exec(save_output, {}, {})
 
+        time.sleep(2)
+
         if os.path.exists(output):
             return output
         else:
-            raise Exception("Visualization file not created")
+            time.sleep(2)
+            if os.path.exists(output):
+                return output
+            else:
+                raise Exception("Visualization file not created")
             
     except Exception as e:
         raise Exception(f"Error executing Python code: {str(e)}")

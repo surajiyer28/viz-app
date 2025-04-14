@@ -21,6 +21,7 @@ export class HomeComponent {
     this.loading = true;
     this.error = null;
     this.visualizationPath = null;
+
     
     this.visualizationService.generateVisualization(data).subscribe({
       next: (response) => {

@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import os
-from utils.python_executor import execute_py_code
+from utils.execute_py_code import execute_py_code # type: ignore
 
 
 app = Flask(__name__)
@@ -16,7 +16,7 @@ def visualize():
     
     req = request.json
     code = req.get('code')
-    lang = req.get('language', '').lower()
+    lang = req.get('lang', '').lower()
     
 
     if not code:
@@ -52,4 +52,4 @@ def get_visualization(filename):
     return send_from_directory('static/visualizations', filename)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5000, threaded=True)

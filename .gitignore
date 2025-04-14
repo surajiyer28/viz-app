@@ -41,6 +41,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Flask
-backend/__pycache__/
-backend/venv/
+# Additional
+__pycache__/
+venv/
+static/visualizations/
