@@ -18,7 +18,8 @@ def execute_py_code(code):
 try:
     if 'fig' in locals() or 'fig' in globals():
         import plotly.io as pio
-        pio.write_html(fig, '{output}', auto_open=False)
+        config = {{'scrollZoom': True, 'displayModeBar': True}}
+        pio.write_html(fig, '{output}', auto_open=False, config=config)
 except Exception as e:
     print(f"Error saving Plotly visualization: {{e}}")
 """
