@@ -17,13 +17,16 @@ export class HomeComponent {
   
   constructor(private visualizationService: VisualizationService) {}
   
-  onSubmit(data: {code: string, lang: 'python' | 'r'}) {
+  onSubmit(eventData: any) {
+    const code = eventData.code;
+    const lang = eventData.lang;
+
     this.loading = true;
     this.error = null;
     this.visualizationPath = null;
 
     
-    this.visualizationService.generateVisualization(data).subscribe({
+    this.visualizationService.generateVisualization({code: code, lang: lang}).subscribe({
       next: (response) => {
         this.loading = false;
         
