@@ -1,1 +1,12 @@
-<p>home works!</p>
+<div class="container">
+    <h2>Data Visualization Generator</h2>
+    <p>Create visualizations using Python or R code</p>
+    
+    <app-viz-form (submit)="onSubmit($event)"></app-viz-form>
+    
+    <app-viz-display
+      [visualizationPath]="visualizationPath"
+      [loading]="loading"
+      [error]="error"
+    ></app-viz-display>
+  </div>
