@@ -1,12 +1,17 @@
-<div class="container">
-    <h2>Data Visualization Application</h2>
-    <p>Create visualizations using Python or R code</p>
+<div class="full-width-container">
+    <h3>Create visualizations using Python or R code</h3>
     
-    <app-viz-form (submit)="onSubmit($event)"></app-viz-form>
-    
-    <app-viz-display
-      [visualizationPath]="visualizationPath"
-      [loading]="loading"
-      [error]="error"
-    ></app-viz-display>
+    <div class="split-layout">
+      <div class="left-panel">
+        <app-viz-form (submit)="onSubmit($event)"></app-viz-form>
+      </div>
+      
+      <div class="right-panel">
+        <app-viz-display
+          [visualizationPath]="visualizationPath"
+          [loading]="loading"
+          [error]="error"
+        ></app-viz-display>
+      </div>
+    </div>
   </div>

@@ -7,5 +7,5 @@ import { Component, signal } from '@angular/core';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  title = signal("Viz-App: Language Agnostic Visualization Web Application")
+  title = signal("VIZ-APP: Language Agnostic Visualization Web Application")
 }

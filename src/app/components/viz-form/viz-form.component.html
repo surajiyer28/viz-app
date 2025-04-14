@@ -1,14 +1,22 @@
 <div class="form-container">
-    <div class="language-selector">
-      <label for="language">Select Language:</label>
-      <select id="language" [(ngModel)]="lang">
-        <option value="python">Python</option>
-        <option value="r">R</option>
-      </select>
+    <div class="form-header">
+      <div class="language-selector">
+        <label for="language">Select Language:</label>
+        <select id="language" [(ngModel)]="lang">
+          <option value="python">Python</option>
+          <option value="r">R</option>
+        </select>
+      </div>
+      
+      <div class="actions">
+        <button 
+          (click)="submitCode()" 
+          [disabled]="!code.trim()"
+        >Generate Visualization</button>
+      </div>
     </div>
   
     <div class="code-area">
-      <label for="code-editor">Enter your code:</label>
       <textarea 
         id="code-editor" 
         [(ngModel)]="code" 
@@ -20,12 +28,5 @@
     <div class="sample-code" *ngIf="lang === 'python'">
       <h4>Sample Matplotlib Code:</h4>
       <button (click)="loadSampleCode()">Load Sample</button>
-    </div>
-  
-    <div class="actions">
-      <button 
-        (click)="submitCode()" 
-        [disabled]="!code.trim()"
-      >Generate Visualization</button>
     </div>
   </div>

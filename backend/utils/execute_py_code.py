@@ -8,7 +8,7 @@ def execute_py_code(code):
 
 
     filename = f"{uuid.uuid4()}.png"
-    output = os.path.join('static/visualizations', filename)
+    output = os.path.join('static', 'visualizations', filename).replace('\\', '/')
     
     # Appending code to save the visualization
     save_output = code + f"""

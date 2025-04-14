@@ -44,4 +44,4 @@ Thumbs.db
 # Additional
 __pycache__/
 venv/
-static/visualizations/
+backend/static
