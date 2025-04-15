@@ -1,0 +1,91 @@
+# Static Correlation Heatmap Using Seaborn
+
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Generate synthetic data
+np.random.seed(0)
+data = pd.DataFrame({
+    'math_score': np.random.normal(70, 10, 100),
+    'reading_score': np.random.normal(72, 8, 100),
+    'writing_score': np.random.normal(68, 9, 100),
+    'hours_studied': np.random.normal(5, 2, 100)
+})
+
+# Compute correlation matrix
+corr_matrix = data.corr()
+
+# Plot heatmap
+plt.figure(figsize=(8, 6))
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt='.2f')
+plt.title("Correlation Heatmap of Student Performance Metrics")
+plt.tight_layout()
+plt.show()
+
+
+# Interactive 3D scatter-plot using plotly
+
+import numpy as np
+import pandas as pd
+import plotly.express as px
+
+# Generate synthetic 3D sensor data
+np.random.seed(1)
+df_3d = pd.DataFrame({
+    'X': np.random.uniform(0, 100, 100),
+    'Y': np.random.uniform(0, 100, 100),
+    'Z': np.random.uniform(0, 100, 100),
+    'Sensor': np.random.choice(['A', 'B', 'C'], 100)
+})
+
+# 3D scatter plot
+fig = px.scatter_3d(df_3d, x='X', y='Y', z='Z', color='Sensor',
+                    title='3D Scatter Plot of Sensor Readings')
+fig.update_layout(scene=dict(
+    xaxis_title='X Position',
+    yaxis_title='Y Position',
+    zaxis_title='Z Reading'
+))
+fig.show()
+
+
+# Static bar chart using ggplot2
+
+library(ggplot2)
+
+# Generate synthetic data
+set.seed(123)
+category <- sample(c("A", "B", "C", "D"), 200, replace = TRUE)
+df_bar <- data.frame(Category = category)
+
+# Plot static bar chart
+p <- ggplot(df_bar, aes(x = Category)) +
+  geom_bar(fill = "steelblue") +
+  labs(title = "Frequency of Categories",
+       x = "Category",
+       y = "Count") +
+  theme_minimal()
+
+print(p)
+
+
+# Interactive Line Chart using plotly in Reading
+
+library(plotly)
+
+# Generate synthetic time series data
+set.seed(456)
+days <- seq.Date(from = as.Date("2023-01-01"), by = "day", length.out = 30)
+visits <- cumsum(rnorm(30, mean = 100, sd = 15))
+df_line <- data.frame(Date = days, Visits = visits)
+
+# Create interactive line chart
+p <- plot_ly(df_line, x = ~Date, y = ~Visits, type = 'scatter', mode = 'lines+markers',
+        marker = list(color = 'red'), line = list(color = 'blue')) %>%
+  layout(title = 'Website Visits Over Time (Interactive)',
+         xaxis = list(title = 'Date'),
+         yaxis = list(title = 'Visits'))
+
+print(p)
